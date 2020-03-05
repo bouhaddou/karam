@@ -8,6 +8,7 @@ use App\Entity\Garant;
 use App\Entity\Images;
 use App\Entity\Kafala;
 use App\Entity\Familly;
+use App\Entity\Projets;
 use App\Entity\Orphelin;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -27,13 +28,27 @@ class AppFixtures extends Fixture
 
            $date= $faker->dateTime($max = 'now', $timezone = null);
            $familly->setNom($faker->lastname)
-                ->setSetAt($date)
-                ->setPhone($faker->phoneNumber)
-                ->setAdresse($faker->sentence());
+                    ->setSetAt($date)
+                    ->setPhone($faker->phoneNumber)
+                    ->setAdresse($faker->sentence());
             $manager->persist($familly);
            $famillys[]=$familly;
        }
 
+       for( $l=0;$l<=15;$l++)
+       {
+           $projet = new Projets();
+           $content ='<p>' . join('</p><p>',$faker->paragraphs(3)) .'</p>';
+           $date= $faker->dateTime($max = 'now', $timezone = null);
+           $avatar= $faker->imageUrl(1000,300);
+           $projet->setTitre($faker->sentence())
+                ->setSetAt($date)
+                ->setImage($avatar)
+                ->setDescription($content)
+                ->setEtat($faker->randomElement(['oui','non']))
+                ->setPrix($faker->randomFloat(2,250,5000));
+            $manager->persist($projet);
+       }
 
        for( $k=0;$k<=10;$k++)
        {

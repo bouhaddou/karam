@@ -75,6 +75,9 @@
     </div>
 
     <!-- end conunt -->
+    {# debut  photos #}
+    {% include "pages/images.html.twig" %}
+    {# fin photos #}
     <!-- psection des news -->
     <div class="newThemeHeader">
         <div class="container">
@@ -89,48 +92,27 @@
     <section class="content ">
         <div class="contentView clearfix pure-form">
             <div class="row">
-                
+            {%  for projet in projets %}
                 <div class="list_news  col-md-4 col-sm-6 col-xs-12">
                     <div class="list_theme_1">
                         <div class="thumbnail block_1"> 
-                            <img src="sites/default/files/styles/list_theme_1/public/cover/WhatsApp%20Image%202020-03-01%20at%202.46.57%20AM925b.jpg?itok=nqDqU2mO" class="team-img">        <div class="caption">
-                            <h3 class="list_theme_1_title"><a href="news/1729.html">اختتام فعاليات مبادرة لغة اليتيم الأول</a></h3>
-                            <div class="list_theme_1_body">نيابة عن صاحب السمو الملكي الأمير بدر بن سلطان بن عبد العزيز نائب أالأسة المكرمة.</div>
+                            <img src="{{ projet.image }}" class="team-img">       
+                             <div class="caption">
+                            <h3 class="list_theme_1_title">
+                                <a href="news/1729.html"> {{ projet.titre }}</a>
+                            </h3>
+                            <div class="list_theme_1_body">{{ projet.description|slice(0,250)|raw }}</div>
                                 <a class="list_theme_1_more" href="news/1729.html">المزيد</a>
                             </div>
                         </div>
                     </div>
                 </div>
-
-               
-                <div class="list_news  col-md-4 col-sm-6 col-xs-12">
-                    <div class="list_theme_1">
-                        <div class="thumbnail block_1"> 
-                            <img src="sites/default/files/styles/list_theme_1/public/cover/WhatsApp%20Image%202020-03-01%20at%202.46.57%20AM925b.jpg?itok=nqDqU2mO" class="team-img">        <div class="caption">
-                            <h3 class="list_theme_1_title"><a href="news/1729.html">اختتام فعاليات مبادرة لغة اليتيم الأول</a></h3>
-                            <div class="list_theme_1_body">نيابة عن صاحب السمو الملكي الأمير بدر بن سلطان بن عبد العزيز نائب أالأسة المكرمة.</div>
-                                <a class="list_theme_1_more" href="news/1729.html">المزيد</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                
-                <div class="list_news  col-md-4 col-sm-6 col-xs-12">
-                    <div class="list_theme_1">
-                        <div class="thumbnail block_1"> 
-                            <img src="sites/default/files/styles/list_theme_1/public/cover/WhatsApp%20Image%202020-03-01%20at%202.46.57%20AM925b.jpg?itok=nqDqU2mO" class="team-img">        <div class="caption">
-                            <h3 class="list_theme_1_title"><a href="news/1729.html">اختتام فعاليات مبادرة لغة اليتيم الأول</a></h3>
-                            <div class="list_theme_1_body">نيابة عن صاحب السمو الملكي الأمير بدر بن سلطان بن عبد العزيز نائب أالأسة المكرمة.</div>
-                                <a class="list_theme_1_more" href="news/1729.html">المزيد</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            {% endfor %}      
             </div>
         </div>
     </section>
 </div>
 <!-- fin de section des news -->
 {% include "pages/kafil.html.twig" %}
+{% include "pages/partenaire.html.twig" %}
 {% endblock %}

@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Orphelin index{% endblock %}
+
+{% block body %}
+    <h1>Orphelin index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>FirstName</th>
+                <th>LastName</th>
+                <th>Image</th>
+                <th>SetAt</th>
+                <th>Adresse</th>
+                <th>Genre</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for orphelin in orphelins %}
+            <tr>
+                <td>{{ orphelin.id }}</td>
+                <td>{{ orphelin.firstName }}</td>
+                <td>{{ orphelin.lastName }}</td>
+                <td>{{ orphelin.image }}</td>
+                <td>{{ orphelin.setAt ? orphelin.setAt|date('Y-m-d') : '' }}</td>
+                <td>{{ orphelin.adresse }}</td>
+                <td>{{ orphelin.genre }}</td>
+                <td>
+                    <a href="{{ path('orphelin_show', {'id': orphelin.id}) }}">show</a>
+                    <a href="{{ path('orphelin_edit', {'id': orphelin.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('orphelin_new') }}">Create new</a>
+{% endblock %}

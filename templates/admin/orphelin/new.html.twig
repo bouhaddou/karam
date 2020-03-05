@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Orphelin{% endblock %}
+
+{% block body %}
+    <h1>Create new Orphelin</h1>
+
+    {{ include('orphelin/_form.html.twig') }}
+
+    <a href="{{ path('orphelin_index') }}">back to list</a>
+{% endblock %}
