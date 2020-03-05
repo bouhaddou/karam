@@ -9,11 +9,12 @@
             <div class="row">
                 <div class="col-md-12 col-sm-12 col-xs-12 text-right front_2F front_2F_h_1">
                     <div class="col-md-12 col-sm-12 col-xs-12 text-right newsItemS  owl-carousel bootstrap_noPadding">
+                  
                     {% for post in posts %}
                         <div class="col-md-12 col-sm-12 col-xs-12 text-right bootstrap_noPadding">
                             <div class=" col-md-4 hidden-sm hidden-xs text-right imgNews thumbnail bootstrap_noPadding">
-                                <img  src="{{ post.image}}"  class="team-img team-imgF">
-                            </div>
+                                <img  src=""  class="team-img team-imgF">
+                            </div>  
                             <div class="col-md-8 col-sm-12 col-xs-12 text-right ">
                                 <div class="hidden-lg hidden-md col-sm-12 col-xs-12 text-right imgNews thumbnail bootstrap_noPadding">
                                     <img src="sites/default/files/styles/front_news/public/cover/WhatsApp%20Image%202020-02-29%20at%2012.48.20%20AM%20(4)f243.jpg?itok=L68c3Tsh"  class="team-img ">
@@ -25,8 +26,8 @@
                                 <a class="newsMore" href="news/1724.html"></a>
                             </div>
                         </div> 
-                    {% endfor %}                   
-                    </div>
+                    {% endfor %}
+                    </div>  
                     <div class="col-md-12 col-sm-12 col-xs-12 text-right newsItemSPagerS bootstrap_noPadding">
                         <div class="newsItemSPager"></div>           
                     </div>
@@ -43,14 +44,14 @@
                 
                 <div class="col-md-3  col-sm-6 col-xs-12 bootstrap_noPadding text-center ">
                     <div class="front_counters_in">
-                        <div class="front_counters_1 front_counters_1_c1">200</div>
+                        <div class="front_counters_1 front_counters_1_c1">{{ stats.orphelin }}</div>
                     </div>
                     <div class="front_counters_in2">عدد الأيتام المسجلين</div>
                 </div>
                 
                 <div class="col-md-3 col-sm-6 col-xs-12 bootstrap_noPadding text-center ">
                     <div class="front_counters_in">
-                        <div class="front_counters_1 front_counters_1_c3">1457</div>
+                        <div class="front_counters_1 front_counters_1_c3">{{ stats.familly }}</div>
                     </div>
                     <div class="front_counters_in2">عدد الأسر</div>
                 </div>

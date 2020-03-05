@@ -6,6 +6,7 @@ use App\Entity\Post;
 use App\Entity\Compteur;
 use App\Repository\PostRepository;
 use App\Repository\CompteurRepository;
+use App\Repository\OrphelinRepository;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -15,11 +16,13 @@ class AppController extends AbstractController
     /**
      * @Route("/", name="app")
      */
-    public function index(PostRepository $repo,CompteurRepository $repo2)
+    public function index(PostRepository $repoPost,CompteurRepository $repoCompteur,OrphelinRepository $repoOrphelin)
     {
        
-        $cpt = $repo2->findOneBy(['id' => 1 ]);
+        $cpt = $repoCompteur->findOneBy(['id' => 2 ]);
         $zz = $this->getDoctrine()->getManager();
+        $orphelin = $zz->createQuery(" SELECT count(c) FROM App\Entity\Orphelin c ")->getSingleScalarResult();
+        $familly = $zz->createQuery(" SELECT count(f) FROM App\Entity\Familly f ")->getSingleScalarResult();
          if(($cpt == null) )
          {
         $com = new Compteur();
@@ -33,8 +36,10 @@ class AppController extends AbstractController
             $zz->flush();
 
         return $this->render('pages/index.html.twig', [
-          'posts' => $repo->findSomePost(12),
-         'compteur' => $cpt
+          'posts' => $repoPost->findSomePost(4),
+          'orphelins' => $repoOrphelin->findAll(4),
+          'compteur' => $cpt,
+          'stats'  => compact('orphelin','familly'),
         ]);
     }
 }

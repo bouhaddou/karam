@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20200305103633 extends AbstractMigration
+final class Version20200305150656 extends AbstractMigration
 {
     public function getDescription() : string
     {
@@ -24,7 +24,8 @@ final class Version20200305103633 extends AbstractMigration
 
         $this->addSql('ALTER TABLE garant CHANGE email email VARCHAR(255) DEFAULT NULL');
         $this->addSql('ALTER TABLE images CHANGE caption caption VARCHAR(255) DEFAULT NULL');
-        $this->addSql('ALTER TABLE orphelin ADD genre VARCHAR(255) NOT NULL');
+        $this->addSql('ALTER TABLE orphelin ADD CONSTRAINT FK_E67E34F58D6893A3 FOREIGN KEY (familly_id) REFERENCES familly (id)');
+        $this->addSql('CREATE INDEX IDX_E67E34F58D6893A3 ON orphelin (familly_id)');
     }
 
     public function down(Schema $schema) : void
@@ -34,6 +35,7 @@ final class Version20200305103633 extends AbstractMigration
 
         $this->addSql('ALTER TABLE garant CHANGE email email VARCHAR(255) DEFAULT \'NULL\' COLLATE utf8mb4_unicode_ci');
         $this->addSql('ALTER TABLE images CHANGE caption caption VARCHAR(255) DEFAULT \'NULL\' COLLATE utf8mb4_unicode_ci');
-        $this->addSql('ALTER TABLE orphelin DROP genre');
+        $this->addSql('ALTER TABLE orphelin DROP FOREIGN KEY FK_E67E34F58D6893A3');
+        $this->addSql('DROP INDEX IDX_E67E34F58D6893A3 ON orphelin');
     }
 }

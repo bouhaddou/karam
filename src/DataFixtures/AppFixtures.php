@@ -7,6 +7,7 @@ use App\Entity\Post;
 use App\Entity\Garant;
 use App\Entity\Images;
 use App\Entity\Kafala;
+use App\Entity\Familly;
 use App\Entity\Orphelin;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -17,7 +18,22 @@ class AppFixtures extends Fixture
     {
         $faker =Factory::create('FR-fr');
        $orphelins= [];
+       $famillys= [];
        $genres=['male','female'];
+
+       for( $r=0;$r<=10;$r++)
+       {
+           $familly = new Familly();
+
+           $date= $faker->dateTime($max = 'now', $timezone = null);
+           $familly->setNom($faker->lastname)
+                ->setSetAt($date)
+                ->setPhone($faker->phoneNumber)
+                ->setAdresse($faker->sentence());
+            $manager->persist($familly);
+           $famillys[]=$familly;
+       }
+
 
        for( $k=0;$k<=10;$k++)
        {
@@ -28,11 +44,13 @@ class AppFixtures extends Fixture
            $picturesID =$faker->numberBetween(1,99). '.jpg';
            $picture = $image.($genre =='male' ? 'men/' : 'women/').$picturesID;
            $date= $faker->dateTime($max = 'now', $timezone = null);
+           $familly=$famillys[mt_rand(0,count($famillys) - 1 )];
            $orphelin->setFirstName($faker->username)
                 ->setLastName($faker->lastname)
                 ->setImage($picture)
                 ->setGenre($genre)
                 ->setSetAt($date)
+                ->setFamilly($familly)
                 ->setAdresse($faker->sentence());
             $manager->persist($orphelin);
            $orphelins[]=$orphelin;
