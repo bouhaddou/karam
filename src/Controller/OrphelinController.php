@@ -20,7 +20,7 @@ class OrphelinController extends AbstractController
      */
     public function index(OrphelinRepository $orphelinRepository): Response
     {
-        return $this->render('orphelin/index.html.twig', [
+        return $this->render('admin/orphelin/index.html.twig', [
             'orphelins' => $orphelinRepository->findAll(),
         ]);
     }
@@ -36,13 +36,18 @@ class OrphelinController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
+            $file = $form['image']->getData();
+            $filename = md5(uniqid()) . '.' . $file->guessExtension();
+            $file->move($this->getParameter('upload_directory'), $filename);
+            $orphelin->setImage($filename);
+
             $entityManager->persist($orphelin);
             $entityManager->flush();
 
             return $this->redirectToRoute('orphelin_index');
         }
 
-        return $this->render('orphelin/new.html.twig', [
+        return $this->render('admin/orphelin/new.html.twig', [
             'orphelin' => $orphelin,
             'form' => $form->createView(),
         ]);

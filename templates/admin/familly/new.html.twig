@@ -1,11 +1,29 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin/base.html.twig' %}
 
-{% block title %}New Familly{% endblock %}
+{% block title %} familles{% endblock %}
 
 {% block body %}
-    <h1>Create new Familly</h1>
+<div class="content-header">
+<div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0 text-dark">Gestion Famille</h1>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item "><a href="{{ path('admin_dashboard') }}">Table de bord</a></li>
+              <li class="breadcrumb-item " ><a href="{{ path('familly_index') }}">Famille</a></li>
+              <li class="breadcrumb-item active">Ajouter une Famille</li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    <div class="container">
+    <h1 class="text-center mt-3 mb-3">Ajouter une Famille</h1>
 
-    {{ include('familly/_form.html.twig') }}
+    {{ include('admin/familly/_form.html.twig') }}
 
-    <a href="{{ path('familly_index') }}">back to list</a>
+    <a class="btn btn-primary" href="{{ path('familly_index') }}"><i class="fas fa-undo"></i> Retour</a>
+    </div>
+    </div>
 {% endblock %}

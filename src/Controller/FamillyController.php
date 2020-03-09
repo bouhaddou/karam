@@ -42,18 +42,18 @@ class FamillyController extends AbstractController
             return $this->redirectToRoute('familly_index');
         }
 
-        return $this->render('familly/new.html.twig', [
+        return $this->render('admin/familly/new.html.twig', [
             'familly' => $familly,
             'form' => $form->createView(),
         ]);
     }
 
     /**
-     * @Route("/{id}", name="familly_show", methods={"GET"})
+     * @Route("/{id}/show", name="familly_show", methods={"GET"})
      */
     public function show(Familly $familly): Response
     {
-        return $this->render('familly/show.html.twig', [
+        return $this->render('admin/familly/show.html.twig', [
             'familly' => $familly,
         ]);
     }
@@ -72,7 +72,7 @@ class FamillyController extends AbstractController
             return $this->redirectToRoute('familly_index');
         }
 
-        return $this->render('familly/edit.html.twig', [
+        return $this->render('admin/familly/edit.html.twig', [
             'familly' => $familly,
             'form' => $form->createView(),
         ]);
