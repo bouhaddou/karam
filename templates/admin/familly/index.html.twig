@@ -21,13 +21,13 @@
   
     <h1 class="text-center mt-3 mb-2">Liste des Familles</h1>
     <a class="float-right btn btn-success mb-2" href="{{ path('familly_new') }}"><i class="fas fa-plus"></i> Ajouter une Famille</a>
-    <table class="table">
+    <table class="table table-hover">
         <thead>
             <tr>
                 <th>Id</th>
                 <th>Nom de  Famille</th>
                 <th class="text-center">Date Création</th>
-                <th>Adresse</th>
+                <th class="text-center">Adresse</th>
                 <th class="text-center">Téléphone</th>
                 <th class="text-center">Actions</th>
             </tr>
@@ -38,7 +38,7 @@
                 <td>{{ familly.id }}</td>
                 <td>{{ familly.nom }}</td>
                 <td class="text-center">{{ familly.setAt ? familly.setAt|date('Y-m-d') : '' }}</td>
-                <td>{{ familly.adresse|slice(0,50) }}</td>
+                <td>{{ familly.adresse|slice(0,30) }}</td>
                 <td>{{ familly.phone }}</td>
                 <td>
                     <a class="text-primary btn" href="{{ path('familly_show', {'id': familly.id}) }}"><i class="fas fa-eye"></i></a>

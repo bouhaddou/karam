@@ -4,14 +4,15 @@ namespace App\Controller;
 
 use App\Entity\Orphelin;
 use App\Form\OrphelinType;
+use App\Form\EditOrphelinType;
 use App\Repository\OrphelinRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
- * @Route("/orphelin")
+ * @Route("/admin/orphelin")
  */
 class OrphelinController extends AbstractController
 {
@@ -21,7 +22,7 @@ class OrphelinController extends AbstractController
     public function index(OrphelinRepository $orphelinRepository): Response
     {
         return $this->render('admin/orphelin/index.html.twig', [
-            'orphelins' => $orphelinRepository->findAll(),
+            'orphelins' => $orphelinRepository->findBy([], ['id'=>'DESC']),
         ]);
     }
 
@@ -54,11 +55,11 @@ class OrphelinController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="orphelin_show", methods={"GET"})
+     * @Route("/{id}/show", name="orphelin_show", methods={"GET"})
      */
     public function show(Orphelin $orphelin): Response
     {
-        return $this->render('orphelin/show.html.twig', [
+        return $this->render('admin/orphelin/show.html.twig', [
             'orphelin' => $orphelin,
         ]);
     }
@@ -68,23 +69,22 @@ class OrphelinController extends AbstractController
      */
     public function edit(Request $request, Orphelin $orphelin): Response
     {
-        $form = $this->createForm(OrphelinType::class, $orphelin);
+        $form = $this->createForm(EditOrphelinType::class, $orphelin);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
-
             return $this->redirectToRoute('orphelin_index');
         }
 
-        return $this->render('orphelin/edit.html.twig', [
+        return $this->render('admin/orphelin/edit.html.twig', [
             'orphelin' => $orphelin,
             'form' => $form->createView(),
         ]);
     }
 
     /**
-     * @Route("/{id}", name="orphelin_delete", methods={"DELETE"})
+     * @Route("/{id}/delete", name="orphelin_delete", methods={"DELETE"})
      */
     public function delete(Request $request, Orphelin $orphelin): Response
     {
@@ -93,7 +93,6 @@ class OrphelinController extends AbstractController
             $entityManager->remove($orphelin);
             $entityManager->flush();
         }
-
         return $this->redirectToRoute('orphelin_index');
     }
 }

@@ -20,7 +20,7 @@ class AppController extends AbstractController
     public function index(PostRepository $repoPost,ProjetsRepository $repoProjet,CompteurRepository $repoCompteur,OrphelinRepository $repoOrphelin)
     {
        
-        $cpt = $repoCompteur->findOneBy(['id' => 4 ]);
+        $cpt = $repoCompteur->findOneBy(['id' => 5 ]);
         $zz = $this->getDoctrine()->getManager();
         $orphelin = $zz->createQuery(" SELECT count(c) FROM App\Entity\Orphelin c ")->getSingleScalarResult();
         $familly = $zz->createQuery(" SELECT count(f) FROM App\Entity\Familly f ")->getSingleScalarResult();

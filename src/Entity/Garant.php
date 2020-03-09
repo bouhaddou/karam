@@ -63,6 +63,11 @@ class Garant
         $this->kafalas = new ArrayCollection();
     }
 
+    public function getFullName()
+    {
+        return "{$this->firstName} {$this->lastName}";
+    }
+
  
 
     public function getId(): ?int

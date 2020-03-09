@@ -1,38 +1,49 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin/base.html.twig' %}
 
-{% block title %}Garant index{% endblock %}
+{% block title %}Garants{% endblock %}
 
 {% block body %}
-    <h1>Garant index</h1>
-
-    <table class="table">
+ 
+   <div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0 text-dark">Gestion des  Garants</h1>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item "><a href="{{ path('admin_dashboard') }}">Table de bord</a></li>
+              <li class="breadcrumb-item active">Garants</li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+      <h1 class="text-center mt-3 mb-2">Liste des Garants</h1>
+    
+    <table class="table table-hover">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>FirstName</th>
-                <th>LastName</th>
+                <th>Nom Complet</th>
                 <th>Paye</th>
-                <th>SetAt</th>
+                <th>Date de debut</th>
                 <th>Email</th>
-                <th>Phone</th>
-                <th>Adresse</th>
-                <th>actions</th>
+                <th>N° Téléphone</th>
+                <th class="text-center">Adresse</th>
+                <th class="text-center">Actions</th>
             </tr>
         </thead>
         <tbody>
         {% for garant in garants %}
             <tr>
-                <td>{{ garant.id }}</td>
-                <td>{{ garant.firstName }}</td>
-                <td>{{ garant.lastName }}</td>
+                <td>{{ garant.getFullName }}</td>
                 <td>{{ garant.paye }}</td>
-                <td>{{ garant.setAt ? garant.setAt|date('Y-m-d') : '' }}</td>
+                <td>{{ garant.setAt ? garant.setAt|date('d-m-Y') : '' }}</td>
                 <td>{{ garant.email }}</td>
                 <td>{{ garant.phone }}</td>
-                <td>{{ garant.adresse }}</td>
+                <td>{{ garant.adresse|slice(0,20) }}</td>
                 <td>
-                    <a href="{{ path('garant_show', {'id': garant.id}) }}">show</a>
-                    <a href="{{ path('garant_edit', {'id': garant.id}) }}">edit</a>
+                    <a class="text-primary btn" href="{{ path('garant_show', {'id': garant.id}) }}"><i class="fas fa-eye"></i></a>
+                    <a class="text-success btn"  href="{{ path('garant_edit', {'id': garant.id}) }}"><i class="fas fa-edit"></i></a>
                 </td>
             </tr>
         {% else %}
@@ -42,6 +53,5 @@
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('garant_new') }}">Create new</a>
+</div>
 {% endblock %}

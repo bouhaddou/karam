@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/garant")
+ * @Route("/admin/garant")
  */
 class GarantController extends AbstractController
 {
@@ -20,8 +20,8 @@ class GarantController extends AbstractController
      */
     public function index(GarantRepository $garantRepository): Response
     {
-        return $this->render('garant/index.html.twig', [
-            'garants' => $garantRepository->findAll(),
+        return $this->render('admin/garant/index.html.twig', [
+            'garants' => $garantRepository->findBy([],['id' => 'DESC']),
         ]);
     }
 
@@ -49,11 +49,11 @@ class GarantController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="garant_show", methods={"GET"})
+     * @Route("/{id}/show", name="garant_show", methods={"GET"})
      */
     public function show(Garant $garant): Response
     {
-        return $this->render('garant/show.html.twig', [
+        return $this->render('admin/garant/show.html.twig', [
             'garant' => $garant,
         ]);
     }
@@ -72,14 +72,14 @@ class GarantController extends AbstractController
             return $this->redirectToRoute('garant_index');
         }
 
-        return $this->render('garant/edit.html.twig', [
+        return $this->render('admin/garant/edit.html.twig', [
             'garant' => $garant,
             'form' => $form->createView(),
         ]);
     }
 
     /**
-     * @Route("/{id}", name="garant_delete", methods={"DELETE"})
+     * @Route("/{id}/delete", name="garant_delete", methods={"DELETE"})
      */
     public function delete(Request $request, Garant $garant): Response
     {
